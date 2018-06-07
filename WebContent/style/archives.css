@@ -1,0 +1,69 @@
+html{
+	padding: 0;
+    margin: 0;
+    overflow: auto;
+    background: url(fond.jpg) no-repeat center fixed;   
+    background-size: cover;
+   }
+/*css pour les archives*/
+#archives{
+    display: grid;
+	width: 100%;
+	height:100%;
+	grid-template-columns: [first] 50% [line2] 50% [end];
+	grid-template-rows:[first] 95% [line2] 5% [end];
+	grid-template-areas: "pub priv"
+                         "footer footer";
+}
+.pub{
+    text-align: center;
+    grid-area: pub;
+    font-family: cursive;
+    font-size: 1em;
+    
+   }
+
+   .priv{
+    text-align: center;
+    grid-area: priv;
+    font-family: cursive;
+    font-size: 1em;
+     
+   }
+   .footer{
+    text-align: center;
+    grid-area: footer;
+    font-family: cursive;
+    font-size: 1em;
+ }
+   .a{
+    font-family: cursive;
+    font-size:1em;
+    color:black;
+    background-color:rgb(16, 235, 27);
+    width: 200px;
+    height: 60px;
+    align-self: center;     
+    border:none;
+	padding:6px 0 6px 0;
+	border-radius:8px;
+}
+/*message reçu en privé*/
+.privé{
+    color : orange;
+}
+/*message envoyer en public*/
+.pseudopublic{
+    text-align: right;
+    color : blue;
+}
+/*message envoyé en privé*/
+.pseudoprive{
+    text-align: right;
+    color : green;
+}
+fieldset{
+    font-size: 1em;
+    background-color: rgba(225, 236, 226, 0.5);
+    overflow: auto; 
+}
