@@ -20,6 +20,9 @@
 	      $('#users').load('refresh_user');//appel la page refresh_user
 	    }, 1000); // tous les 10 millisecondes 
 	  });
+	 function validerZoneSaisie(){
+	      document.getElementById("zonesaisie").submit();
+	  }
 </script>   
 
     <title>AFPA chat</title>
@@ -48,12 +51,13 @@ Bonjour <%= session.getAttribute("pseudo") %> Salon : <%= session.getAttribute("
 </div>
 </fieldset>
 </div>
-<div>
-</div>
+<div class ="footer">
+<%= session.getAttribute("area") %>
 <div class="quit">
 <form  action="choix" method="post">
 <input class="bouton" type='submit' value='Quitter ce salon' name='quit'></input></form>
 </div>
 </div>
+
 </body>
 </html>

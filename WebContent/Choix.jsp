@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
     <link href="style/choix.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image" href="flav.jpg">
+    <link rel="shortcut icon" type="image" href="style/flav.jpg">
 <title>AFPA chat</title>
 </head>
 <body>

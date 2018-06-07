@@ -5,11 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Utilisateurs {	
+public class Utilisateurs {
 	private BDD _bdd;
 
 	public Utilisateurs() {
-		
+
 	}
 
 	public String get_users(String base) throws SQLException {
@@ -20,11 +20,15 @@ public class Utilisateurs {
 		String requete = "select pseudo from " + base;
 		ResultSet result;
 		result = stm.executeQuery(requete);
-		while (result.next()) {
-			refresh += "<form  action='salon' method='post'><input class='utilisateurs' type='submit' value='"
-					+ result.getString("pseudo") + "></input><br><br><br></form>";
+		while (result.next()) {			
+				refresh += "<form  action='choix' method='post'><input class='utilisateurs' type='submit' value='"
+						+ result.getString("pseudo") + "' name='user'></input><br><br><br></form>";
 
+			
 		}
+		result.close();
+		stm.close();
+		connect.close();
 		return refresh;
 	}
 }

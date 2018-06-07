@@ -33,23 +33,20 @@ public class refresh_user extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		//String salon = (String)session.getAttribute("salon")+"instant";
-		session.setAttribute("ujour", "alorsa");
-		RequestDispatcher rd;
-		rd = getServletContext().getRequestDispatcher("/WEB-INF/maju.jsp");
-//		String salon_instant = salon.toLowerCase();
-//		String users_a_jour;
-//		Utilisateurs u = new Utilisateurs();
-//		try {
-//			users_a_jour = u.get_users(salon_instant);
-//			session.setAttribute("ujour", "alorsa");
-//			RequestDispatcher rd;
-//			rd = getServletContext().getRequestDispatcher("/WEB-INF/maju.jsp");
-//			rd.forward(request, response);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String salon = (String)session.getAttribute("salon")+"instant";		
+		String salon_instant = salon.toLowerCase();
+		String users_a_jour;
+		Utilisateurs u = new Utilisateurs();
+		try {
+			users_a_jour = u.get_users(salon_instant);
+			session.setAttribute("ujour", users_a_jour);
+			RequestDispatcher rd;
+			rd = getServletContext().getRequestDispatcher("/WEB-INF/maju.jsp");
+			rd.forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

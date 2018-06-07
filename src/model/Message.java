@@ -35,68 +35,69 @@ public class Message {
 			ajout.add(result.getString("destinataire"));
 			liste.add(ajout);
 		}
+		result.close();
 		if (liste.size() == 0) {
 			refresh = "pas de message encore enregistré";
 		} else {
 			if (liste.size() > 16) {
 				for (int i = (liste.size() - 16); i < liste.size(); i++) {
-					if (Integer.parseInt(liste.get(i).get(4)) == 1) {
+					if (Integer.parseInt(liste.get(i).get(3)) == 1) {
 						if (liste.get(i).get(0).equals(_pseudo)) {
-							refresh += "<div class='pseudopublic'><strong> Pseudo :" + liste.get(i).get(0)
-									+ "</strong>Date du message :" + liste.get(i).get(2)
-									+ "Type du message : Public<br><em>Message : </em>" + liste.get(i).get(1) + "<br>";
+							refresh += "<div class='pseudopublic'><strong> Pseudo : " + liste.get(i).get(0)
+									+ "   </strong>Date du message :" + liste.get(i).get(2)
+									+ "   Type du message : Public<br><em>Message : </em>" + liste.get(i).get(1) + "<br><div>";
 						} else {
-							refresh += "<strong> Pseudo :" + liste.get(i).get(0) + "</strong>Date du message :"
-									+ liste.get(i).get(2) + "Type du message : Public<br><em>Message : </em>"
-									+ liste.get(i).get(1) + "<br>";
+							refresh += "<strong> Pseudo : " + liste.get(i).get(0) + "   </strong>Date du message :"
+									+ liste.get(i).get(2) + "   Type du message : Public<br><em>Message : </em>"
+									+ liste.get(i).get(1) + "<br><div>";
 						}
 					}
-					if (Integer.parseInt(liste.get(i).get(3)) == 1) {
+					if (Integer.parseInt(liste.get(i).get(4)) == 1) {
 						if (liste.get(i).get(5).equals(_pseudo)) {
-							refresh += "<div class='privé'><strong> Pseudo :" + liste.get(i).get(0)
-									+ "</strong>Date du message :" + liste.get(i).get(2)
-									+ "Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1) + "<br>";
+							refresh += "<div class='privé'><strong> Pseudo : " + liste.get(i).get(0)
+									+ "   </strong>Date du message :" + liste.get(i).get(2)
+									+ "   Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1) + "<br><div>";
 						}
 						if (liste.get(i).get(0).equals(_pseudo)) {
-							refresh += "<div class='pseudoprive'><strong> Pseudo :" + liste.get(i).get(0)
-									+ "</strong>Date du message :" + liste.get(i).get(2)
-									+ "Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1) + "<br>";
+							refresh += "<div class='pseudoprive'><strong> Pseudo : " + liste.get(i).get(0)
+									+ "   </strong>Date du message :" + liste.get(i).get(2)
+									+ "   Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1) + "<br><div>";
 						}
 					}
 				}
 			} else {
 				for (int i = 0; i < liste.size(); i++) {
-					if (Integer.parseInt(liste.get(i).get(4)) == 1) {						
+					if (Integer.parseInt(liste.get(i).get(3)) == 1) {						
 							if (liste.get(i).get(0).equals(_pseudo)) {
-								refresh += "<div class='pseudopublic'><strong> Pseudo :" + liste.get(i).get(0)
-										+ "</strong>Date du message :" + liste.get(i).get(2)
-										+ "Type du message : Public<br><em>Message : </em>" + liste.get(i).get(1)
-										+ "<br>";
+								refresh += "<div class='pseudopublic'><strong> Pseudo : " + liste.get(i).get(0)
+										+ "   </strong>Date du message : " + liste.get(i).get(2)
+										+ "   Type du message : Public<br><em>Message : </em>" + liste.get(i).get(1)
+										+ "<br><div>";
 							} else {
-								refresh += "<strong> Pseudo :" + liste.get(i).get(0) + "</strong>Date du message :"
-										+ liste.get(i).get(2) + "Type du message : Public<br><em>Message : </em>"
-										+ liste.get(i).get(1) + "<br>";
+								refresh += "<strong> Pseudo : " + liste.get(i).get(0) + "   </strong>Date du message :"
+										+ liste.get(i).get(2) + "   Type du message : Public<br><em>Message : </em>"
+										+ liste.get(i).get(1) + "<br><div>";
 							}
 						
-						if (Integer.parseInt(liste.get(i).get(3)) == 1) {
+						if (Integer.parseInt(liste.get(i).get(4)) == 1) {
 							if (liste.get(i).get(5).equals(_pseudo)) {
-								refresh += "<div class='privé'><strong> Pseudo :" + liste.get(i).get(0)
-										+ "</strong>Date du message :" + liste.get(i).get(2)
-										+ "Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1)
-										+ "<br>";
+								refresh += "<div class='privé'><strong> Pseudo : " + liste.get(i).get(0)
+										+ "   </strong>Date du message :" + liste.get(i).get(2)
+										+ "   Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1)
+										+ "<br><div>";
 							}
 							if (liste.get(i).get(0).equals(_pseudo)) {
-								refresh += "<div class='pseudoprive'><strong> Pseudo :" + liste.get(i).get(0)
-										+ "</strong>Date du message :" + liste.get(i).get(2)
-										+ "Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1)
-										+ "<br>";
+								refresh += "<div class='pseudoprive'><strong> Pseudo : " + liste.get(i).get(0)
+										+ "   </strong>Date du message :" + liste.get(i).get(2)
+										+ "   Type du message : Privé<br><em>Message : </em>" + liste.get(i).get(1)
+										+ "<br><div>";
 							}
 						}
 					}
 				}
 			}
 		}
-
+		connect.close();
 		return refresh;
 	}
 }

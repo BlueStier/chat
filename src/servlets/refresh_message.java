@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -46,18 +45,8 @@ public class refresh_message extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}	
 		
-		
-//		try {
-//			String message_a_jour=message.get_message((String)session.getAttribute("pseudo"));			
-//			RequestDispatcher rd;			
-//			session.setAttribute("messajour", message_a_jour);
-//			rd = getServletContext().getRequestDispatcher("/WEB-INF/majmess.jsp");
-//			rd.forward(request, response);
-//		} catch (SQLException e) {			
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

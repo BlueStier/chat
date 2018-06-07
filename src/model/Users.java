@@ -28,7 +28,9 @@ public class Users {
 		while (result.next()) {
 			liste.add(result.getString("pseudo"));			
 		}
-		
+		result.close();
+		stm.close();
+		connect.close();
 		return liste;	
 	}
 	public ArrayList<String> verif_mdp(String pse,String str) throws SQLException {
@@ -43,7 +45,9 @@ public class Users {
 			liste.add(result.getString("pseudo"));
 			liste.add(result.getString("mdp"));
 		}
-		
+		result.close();
+		stm.close();
+		connect.close();
 		return liste;	
 	}
 	
@@ -63,6 +67,8 @@ public class Users {
 			Statement stm = connect.createStatement();
 			String requete="insert into utilisateurs values(NULL,'"+_pseudo+"','"+_mdp+"',NOW(),1)";
 			stm.executeUpdate(requete);
+			stm.close();
+			connect.close();
 			return true;			
 		}
 		else {
@@ -76,6 +82,8 @@ public class Users {
 		Statement stm = connect.createStatement();
 		String requete="update utilisateurs set connect="+i+" where pseudo='"+pseudo+"'";
 		stm.executeUpdate(requete);
+		stm.close();
+		connect.close();
 	}
 	
 	public void insert_bddInstant(String pseudo,String str) throws SQLException{
@@ -85,7 +93,10 @@ public class Users {
 			Connection connect=_bdd.getInstance();
 			Statement stm = connect.createStatement();
 			String requete="insert into "+str+" values(NULL,'"+pseudo+"')";
-			stm.executeUpdate(requete);}
+			stm.executeUpdate(requete);
+			stm.close();
+			connect.close();
+			}
 	}
 	
 	public void delete_bddInstant(String pseudo,String str) throws SQLException{	
@@ -95,6 +106,8 @@ public class Users {
 			Statement stm = connect.createStatement();
 			String requete="delete from "+str+" where pseudo='"+pseudo+"'";
 			stm.executeUpdate(requete);
+			stm.close();
+			connect.close();
 	}
 	
 }
