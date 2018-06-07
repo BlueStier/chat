@@ -10,6 +10,7 @@
 </head>
 <body>
 <div id="index">
+
 <div class="header">
 <h1>Page d'Acceuil</h1></div>
 <div class="conect">
