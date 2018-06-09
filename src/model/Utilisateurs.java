@@ -21,8 +21,8 @@ public class Utilisateurs {
 		ResultSet result;
 		result = stm.executeQuery(requete);
 		while (result.next()) {			
-				refresh += "<form  action='choix' method='post'><input class='utilisateurs' type='submit' value='"
-						+ result.getString("pseudo") + "' name='user'></input><br><br><br></form>";
+				refresh += "<form  action='choix' method='post'><button type='submit' class='utilisateurs' type='submit' value='"
+						+ result.getString("pseudo") + "' name='user'>"+result.getString("pseudo")+"</button><br><br><br></form>";
 
 			
 		}

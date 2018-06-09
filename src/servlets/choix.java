@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Archive;
+import model.InsertMessage;
 import model.Users;
 
 /**
@@ -41,10 +43,13 @@ public class choix extends HttpServlet {
 		String peche = request.getParameter("peche");
 		String decon = request.getParameter("Dec");
 		String quit = request.getParameter("quit");
-		String user = request.getParameter("user");		
-		String area_public = "<fieldset><legend>Ecrire en public</legend> <form id='zonesaisie'  action='Zonesaisie' method='post'><textarea name = 'text' rows='2' cols='100' onKeyPress='if(event.keyCode == 13) validerZoneSaisie();'></textarea></form></fieldset>";
+		String user = request.getParameter("user");
+		String message = request.getParameter("text");
+		String archive = request.getParameter("arc");
+		String back = request.getParameter("back");
+		String area_public = "<fieldset><legend>Ecrire en public</legend> <form id='zonesaisie'  action='choix' method='post'><textarea name = 'text' rows='2' cols='100' onKeyPress='if(event.keyCode == 13) validerZoneSaisie();'></textarea></form></fieldset>";
 
-		HttpSession session = request.getSession();		
+		HttpSession session = request.getSession();
 		String pseudo = (String) session.getAttribute("pseudo");
 
 		Users c = new Users(pseudo);
@@ -134,17 +139,55 @@ public class choix extends HttpServlet {
 			}
 			response.sendRedirect(request.getContextPath() + "/Choix.jsp");
 		}
+		String public_or_not = (String) session.getAttribute("user");
+		int pub;
+		int priv;
+		String des = "";
+		if (public_or_not.equals("public")) {
+			pub = 1;
+			priv = 0;
+		} else {
+			pub = 0;
+			priv = 1;
+			des = (String) session.getAttribute("user");
+		}
 		if (user != null) {
 			session.setAttribute("user", user);
-			if(!session.getAttribute("user").equals("public")){
-			String area_user = "<fieldset><legend>Ecrire en privé à "+user+"</legend><form id='zonesaisie'  action='Zonesaisie' method='post'><textarea name ='text' rows='2' cols='100' onKeyPress='if(event.keyCode == 13) validerZoneSaisie();'></textarea></form></fieldset>";
+			String area_user = "<fieldset><legend>Ecrire en privé à " + user
+					+ "</legend><form id='zonesaisie'  action='choix' method='post'><textarea name ='text' rows='2' cols='100' onKeyPress='if(event.keyCode == 13) validerZoneSaisie();'></textarea></form></fieldset>";
 			response.sendRedirect(request.getContextPath() + "/salon.jsp");
-			session.setAttribute("area", area_user);}
-		}else{
+			session.setAttribute("area", area_user);
+		} else {
 			session.setAttribute("user", "public");
 			session.setAttribute("area", area_public);
 		}
-
+		String base = session.getAttribute("salon").toString().toLowerCase();		
+		if (message != null) {
+			InsertMessage inject = new InsertMessage();
+			try {
+				inject.go(base, pseudo, message, priv, pub, des);
+				session.setAttribute("user", "public");
+				response.sendRedirect(request.getContextPath() + "/salon.jsp");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (archive != null) {
+			String mess = "";
+			Archive a = new Archive(base);
+			try {
+				mess = a.get_message(pseudo);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			session.setAttribute("arch", mess);
+			response.sendRedirect(request.getContextPath() + "/archive.jsp");
+		}
+		if (back != null) {
+			response.sendRedirect(request.getContextPath() + "/salon.jsp");
+		}
 	}
 
 	/**
